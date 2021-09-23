@@ -25,7 +25,14 @@ app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
-app.use(cors());
+app.use(cors({
+  origin: ['https://student-list-be.herokuapp.com', 'http://localhost:3000'],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  preflightContinue: true,
+  maxAge: 600,
+  optionSuccessStatus:200
+}));
 app.use('/students', studentRoute)
 app.use('/user',userRoute)
 
