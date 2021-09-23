@@ -10,6 +10,7 @@ const userRoute = require("../backend/routes/user.route")
 
 // Connecting mongoDB Database
 mongoose.Promise = global.Promise;
+mongoose.set('useFindAndModify', false);
 mongoose.connect(dbConfig.db, {
   useNewUrlParser: true
 }).then(() => {
@@ -25,6 +26,11 @@ app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.use(cors());
 app.use('/students', studentRoute)
 app.use('/user',userRoute)
