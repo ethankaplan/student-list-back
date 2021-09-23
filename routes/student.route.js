@@ -12,6 +12,7 @@ router.route('/create-student').post((req, res, next) => {
       return next(error)
     } else {
       console.log(data)
+      res.header("Access-Control-Allow-Origin", "*")
       res.json(data)
     }
   })
