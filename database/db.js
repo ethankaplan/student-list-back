@@ -1,4 +1,5 @@
-if(process.env.ON_HEROKU!==1){
+
+if(process.env.ON_HEROKU==0){
 module.exports = {
     db: 'mongodb://localhost:27017/reactdb'
     

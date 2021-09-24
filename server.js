@@ -1,6 +1,7 @@
 let express = require('express');
 let mongoose = require('mongoose');
 let cors = require('cors');
+require('dotenv').config();
 
 let dbConfig = require('./database/db');
 
