@@ -23,9 +23,9 @@ mongoose.connect(dbConfig.db, {
 
 const app = express();
 app.use(cors({
-  origin:'*',
+  origin:'https://student-list-fe.herokuapp.com',
   credentials:true,
-  
+
 }));
 
 app.use(express.json());
