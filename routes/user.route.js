@@ -1,8 +1,6 @@
 const bcrypt = require('bcrypt');
-const { validate } = require('../models/User');
-let mongoose = require('mongoose'),
-  express = require('express'),
-  router = express.Router();
+const express = require('express');
+const router = express.Router();
 
   let userSchema = require('../models/User');
 

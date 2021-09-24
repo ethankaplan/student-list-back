@@ -23,7 +23,7 @@ mongoose.connect(dbConfig.db, {
 
 const app = express();
 app.use(cors({
-  origin:'https://student-list-fe.herokuapp.com',
+  origin:['https://student-list-fe.herokuapp.com','http://localhost:3000'],
   credentials:true,
 
 }));
