@@ -22,14 +22,7 @@ mongoose.connect(dbConfig.db, {
 )
 
 const app = express();
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "POST,DELETE,PUT,GET,OPTIONS");
-  res.header("Access-Control-Allow-Headers", req.headers['access-control-request-headers']);
-  res.header("Access-Control-Request-Method", req.headers['access-control-request-method']);
-  next();
-});
+
 app.use(express.json());
 app.use(express.urlencoded({
   extended: true
@@ -38,6 +31,14 @@ app.use(express.urlencoded({
 app.use(cors());
 app.use('/students', studentRoute)
 app.use('/user',userRoute)
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "POST,DELETE,PUT,GET,OPTIONS");
+  res.header("Access-Control-Allow-Headers", req.headers['access-control-request-headers']);
+  res.header("Access-Control-Request-Method", req.headers['access-control-request-method']);
+  next();
+});
 
 
 // PORT
