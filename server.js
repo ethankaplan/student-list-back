@@ -5,8 +5,8 @@ let cors = require('cors');
 let dbConfig = require('./database/db');
 
 // Express Route
-const studentRoute = require('../backend/routes/student.route.js')
-const userRoute = require("../backend/routes/user.route.js")
+const studentRoute = require('./routes/student.route')
+const userRoute = require("./routes/user.route")
 
 // Connecting mongoDB Database
 mongoose.Promise = global.Promise;
