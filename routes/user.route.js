@@ -85,7 +85,7 @@ const router = express.Router();
   })
 
   //READ
-router.route('/').get((req, res) => {
+router.route('/').get((req, res, next) => {
   userSchema.find((error, data) => {
     if (error) {
       return next(error)
