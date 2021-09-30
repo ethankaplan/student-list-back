@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
   let userSchema = require('../models/User');
-
+  const studentSchema = require('../models/Student');
   
   //CREATE
   router.route('/create-user').post((req, res, next) => {
@@ -22,13 +22,14 @@ const router = express.Router();
         let roll = Math.floor(100000 + Math.random() * 900000);
         let stoppage = true;
         while(stoppage){
-          console.log(roll)
-            if(userSchema.findOne({rollNum: roll}).data==null){
-              stoppage=false
-            }else{
-              
-              roll = Math.floor(100000 + Math.random() * 900000);
-            }
+          
+          if(userSchema.findOne({rollNum: roll}).data==null && studentSchema.findOne({rollNum: roll}).data==null){
+            stoppage=false
+          }else{
+            
+            roll = Math.floor(100000 + Math.random() * 900000);
+          }
+        
           
           }
         data.rollNum=roll;

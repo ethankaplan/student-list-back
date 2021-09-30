@@ -3,8 +3,9 @@ const express = require('express');
 const router = express.Router();
 
 
-// Student Model
+//Models
 const studentSchema = require('../models/Student');
+const userSchema = require('../models/User')
 
 // CREATE Student
 router.route('/create-student').post((req, res, next) => {
@@ -69,5 +70,25 @@ router.route('/delete-student/:id').delete((req, res, next) => {
     }
   })
 })
+
+//Generate Roll Number, ensuring it's not already in use
+  router.route('/gen').get((req, res, next) => {
+    let stoppage = true;
+    let roll = Math.floor(100000 + Math.random() * 900000);
+    while(stoppage){
+      
+        if(userSchema.findOne({rollNum: roll}).data==null && studentSchema.findOne({rollNum: roll}).data==null){
+          stoppage=false
+        }else{
+          
+          roll = Math.floor(100000 + Math.random() * 900000);
+        }
+      }
+
+      
+        res.json(roll)
+      
+  })
+  
 
 module.exports = router;

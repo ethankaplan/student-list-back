@@ -6,6 +6,8 @@ let studentSchema = new Schema({
   lastName:{type:String,required: true},
   email: {type: String},
   rollNum: {type: Number}
-},{collection: 'students'})
+},
+{collection: 'students'}
+)
 
 module.exports = mongoose.model('Student', studentSchema)
