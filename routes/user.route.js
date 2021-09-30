@@ -50,7 +50,7 @@ const router = express.Router();
         const user = data;
         if(user==null){
           res.json({
-            msg:"Server not running"
+            msg:"Server down"
           })
         }
         else if(bcrypt.compareSync(req.body.password, user.password)){
