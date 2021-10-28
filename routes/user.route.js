@@ -96,4 +96,26 @@ router.route('/').get((req, res, next) => {
   })
 })
 
+router.route('/teachers').get((req,res,next)=>{
+  userSchema.find({accType:'Teacher'}, (error, data) => {
+    if (error) {
+      console.log("bad")
+      return next(error)
+
+    } else {
+      res.json(data)
+    }
+  })
+})
+
+router.route('/user/:id').get((req, res, next) => {
+  userSchema.findById(req.params.id, (error, data) => {
+    if (error) {
+      return next(error)
+    } else {
+      res.json(data)
+    }
+  })
+})
+
   module.exports = router;
