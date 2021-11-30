@@ -1,24 +1,16 @@
-const bcrypt = require('bcrypt');
+
 const express = require('express');
 const router = express.Router();
 
   const classSchema = require('../models/Class') 
-  const userSchema = require('../models/User');
-  const studentSchema = require('../models/Student');
   
   //CREATE
   router.route('/create-class').post((req, res, next) => {
-    console.log("hit")
-    
     classSchema.create(req.body, (error, data) => {
       if (error) {
-        console.log(data)
-        console.log(error)
-        res.json({err,
-        msg:"Bad"})
         return next(error)
       } else {
-        data.save();
+        
         console.log(data)
         res.json(data)
       }
@@ -55,17 +47,20 @@ const router = express.Router();
   })
 
   //READ
-router.route('/class').get((req, res, next) => {
+router.route('/').get((req, res, next) => {
+  console.log("read route")
   classSchema.find((error, data) => {
     if (error) {
+      console.log("bad class")
       return next(error)
     } else {
+      console.log(data)
       res.json(data)
     }
   })
 })
 
-router.route('/class/:id').get((req, res, next) => {
+router.route('/:id').get((req, res, next) => {
   classSchema.findById(req.params.id, (error, data) => {
     if (error) {
       return next(error)

@@ -2,12 +2,14 @@ let express = require('express');
 let mongoose = require('mongoose');
 let cors = require('cors');
 require('dotenv').config();
+const createError = require('http-errors');
 
 let dbConfig = require('./database/db');
 
 // Express Route
 const studentRoute = require('./routes/student.route')
 const userRoute = require("./routes/user.route")
+const classRoute = require("./routes/class.route")
 
 // Connecting mongoDB Database
 mongoose.Promise = global.Promise;
@@ -35,6 +37,7 @@ app.use(express.urlencoded({
 }));
 app.use('/students', studentRoute)
 app.use('/user',userRoute)
+app.use('/class',classRoute)
 
 
 
