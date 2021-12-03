@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let classSchema = new Schema({
-    teacher: {type: String},
+    teacher: { type: Schema.Types.ObjectId, ref: 'User' },
     title:{type:String},
-    students:[String],
+    students:[{type: Schema.Types.ObjectId, ref: 'Student'}],
 
 
 },{
