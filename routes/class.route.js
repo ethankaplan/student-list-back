@@ -37,7 +37,7 @@ router.route("/update-class/:id/title").put((req, res, next) => {
   classSchema.findByIdAndUpdate(
     req.params.id,
     {
-      title: req.query.title,
+      title: req.body,
     },
     (error, data) => {
       if (error) {
@@ -50,16 +50,18 @@ router.route("/update-class/:id/title").put((req, res, next) => {
   );
 });
 
-router.route("/update-class/:id/students").put((req, res, next) => {
+router.route("/:id/update/students").put((req, res, next) => {
+  console.log(req)
   classSchema.findByIdAndUpdate(
     req.params.id,
     {
-      students: req.query.students,
+      students: req.body,
     },
     (error, data) => {
       if (error) {
         return next(error);
       } else {
+        data.msg="Class roster updated"
         res.json(data);
         
         
