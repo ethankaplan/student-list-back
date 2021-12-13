@@ -33,6 +33,63 @@ router.route("/update-class/:id").put((req, res, next) => {
   );
 });
 
+router.route("/:id/update/title").put((req, res, next) => {
+  classSchema.findByIdAndUpdate(
+    req.params.id,
+    {
+      title: req.body.title,
+    },
+    (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.json(data);
+      }
+    }
+  );
+});
+
+router.route("/:id/update/teacher").put((req, res, next) => {
+  console.log(req.body)
+  
+  classSchema.findByIdAndUpdate(
+    req.params.id,
+    {
+      teacher: req.body,
+    },
+    (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        data.msg="Teacher updated"
+        res.json(data);
+        
+        
+      }
+    }
+  );
+});
+
+router.route("/:id/update/students").put((req, res, next) => {
+  console.log(req.body)
+  classSchema.findByIdAndUpdate(
+    req.params.id,
+    {
+      students: req.body,
+    },
+    (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        data.msg="Class roster updated"
+        res.json(data);
+        
+        
+      }
+    }
+  );
+});
+
 //DELETE
 router.route("/delete-class/:id").delete((req, res, next) => {
   classSchema.findByIdAndRemove(req.params.id, (error, data) => {
@@ -84,13 +141,15 @@ router.route("/non/:id").get((req, res, next) => {
     } else {
       students = data;
     }
-  });
+  }).populate("students","_id");
   classSchema.findById(req.params.id, (error, data) => {
     if (error) {
       return next(error);
     } else {
+      console.log(data.students)
+      console.log(students)
       students = students.filter(function (student) {
-        return data.students.indexOf(student) === -1;
+        return data.students.indexOf(student._id) === -1;
       });
       res.json(students);
     }
