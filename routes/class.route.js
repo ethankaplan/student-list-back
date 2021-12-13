@@ -37,7 +37,7 @@ router.route("/:id/update/title").put((req, res, next) => {
   classSchema.findByIdAndUpdate(
     req.params.id,
     {
-      title: req.body,
+      title: req.body.title,
     },
     (error, data) => {
       if (error) {
@@ -51,6 +51,7 @@ router.route("/:id/update/title").put((req, res, next) => {
 
 router.route("/:id/update/teacher").put((req, res, next) => {
   console.log(req.body)
+  
   classSchema.findByIdAndUpdate(
     req.params.id,
     {
