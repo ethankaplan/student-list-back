@@ -33,7 +33,7 @@ router.route("/update-class/:id").put((req, res, next) => {
   );
 });
 
-router.route("/update-class/:id/title").put((req, res, next) => {
+router.route("/:id/update/title").put((req, res, next) => {
   classSchema.findByIdAndUpdate(
     req.params.id,
     {
@@ -44,14 +44,33 @@ router.route("/update-class/:id/title").put((req, res, next) => {
         return next(error);
       } else {
         res.json(data);
-        console.log("Class updated successfully !");
+      }
+    }
+  );
+});
+
+router.route("/:id/update/teacher").put((req, res, next) => {
+  console.log(req.body)
+  classSchema.findByIdAndUpdate(
+    req.params.id,
+    {
+      teacher: req.body,
+    },
+    (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        data.msg="Teacher updated"
+        res.json(data);
+        
+        
       }
     }
   );
 });
 
 router.route("/:id/update/students").put((req, res, next) => {
-  console.log(req)
+  console.log(req.body)
   classSchema.findByIdAndUpdate(
     req.params.id,
     {
