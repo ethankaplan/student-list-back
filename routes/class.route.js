@@ -124,6 +124,12 @@ router.route("/:id").get((req, res, next) => {
       if (error) {
         return next(error);
       } else {
+        if(data.teacher==null){
+          data.teacher={
+            firstName:"Please Update",
+            lastName:"Teacher Missing"
+          }
+        }
         res.json(data);
       }
     })
